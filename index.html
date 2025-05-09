@@ -53,7 +53,7 @@
 </head>
 <body>
 
-  <h1>Nhập dãy số 4 chữ số</h1>
+  <h1>Nhập dãy số 3 chữ số</h1>
 
   <div id="input-area">
     <div class="digit-control">
@@ -71,11 +71,6 @@
       <input type="text" id="num2" class="number-box" value="0" readonly>
       <button class="arrow-btn" onclick="giam(2)">▼</button>
     </div>
-    <div class="digit-control">
-      <button class="arrow-btn" onclick="tang(3)">▲</button>
-      <input type="text" id="num3" class="number-box" value="0" readonly>
-      <button class="arrow-btn" onclick="giam(3)">▼</button>
-    </div>
   </div>
 
   <button id="check" onclick="kiemTra()">Kiểm tra</button>
@@ -88,7 +83,7 @@
   <audio id="checkSound" src="check.mp3" preload="auto"></audio>
 
   <script>
-    const answer = ['2', '0', '1', '9'];
+    const answer = ['2', '0', '1'];
 
     function tang(index) {
       const input = document.getElementById(`num${index}`);
@@ -112,14 +107,13 @@
       const userInput = [
         document.getElementById("num0").value,
         document.getElementById("num1").value,
-        document.getElementById("num2").value,
-        document.getElementById("num3").value
+        document.getElementById("num2").value
       ];
 
       let correctDigits = 0;
       let correctPositions = 0;
 
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < 3; i++) {
         if (userInput[i] === answer[i]) {
           correctPositions++;
         }
@@ -134,7 +128,7 @@
         }
       });
 
-      if (correctPositions === 4) {
+      if (correctPositions === 3) {
         document.getElementById("message").innerText = "Em Phương Anh nể mỗi chị Hường!!!";
         document.getElementById("result").innerText = "";
       } else {
