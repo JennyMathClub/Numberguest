@@ -10,44 +10,55 @@
       margin-top: 50px;
     }
 
+    h1 {
+      font-size: 40px;
+      margin-bottom: 30px;
+    }
+
     .digit-control {
       display: inline-block;
-      margin: 0 10px;
+      margin: 0 20px;
     }
 
     .arrow-btn {
       display: block;
-      width: 40px;
-      height: 30px;
-      font-size: 18px;
-      margin: 2px auto;
+      width: 80px;
+      height: 60px;
+      font-size: 36px;
+      margin: 5px auto;
       cursor: pointer;
     }
 
     .number-box {
-      width: 40px;
-      height: 40px;
-      font-size: 24px;
+      width: 80px;
+      height: 80px;
+      font-size: 48px;
       text-align: center;
-      margin: 4px auto;
+      margin: 8px auto;
     }
 
     button#check {
-      font-size: 18px;
-      margin-top: 20px;
-      padding: 10px 20px;
+      font-size: 28px;
+      margin-top: 40px;
+      padding: 15px 40px;
+      cursor: pointer;
     }
 
     #result {
-      margin-top: 20px;
-      font-size: 20px;
+      margin-top: 30px;
+      font-size: 30px;
     }
 
     #message {
-      margin-top: 30px;
-      font-size: 26px;
+      margin-top: 40px;
+      font-size: 36px;
       color: green;
       font-weight: bold;
+    }
+
+    .history-line {
+      font-size: 28px;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -83,7 +94,7 @@
   <audio id="checkSound" src="check.mp3" preload="auto"></audio>
 
   <script>
-    const answer = ['2', '0', '1'];
+    const answer = ['8', '1', '4'];
 
     function tang(index) {
       const input = document.getElementById(`num${index}`);
@@ -104,11 +115,11 @@
     function kiemTra() {
       document.getElementById("checkSound").play();
 
-      const userInput = [
-        document.getElementById("num0").value,
-        document.getElementById("num1").value,
-        document.getElementById("num2").value
-      ];
+      const num0 = document.getElementById("num0").value;
+      const num1 = document.getElementById("num1").value;
+      const num2 = document.getElementById("num2").value;
+      const userInput = [num0, num1, num2];
+      const userString = num0 + num1 + num2;
 
       let correctDigits = 0;
       let correctPositions = 0;
@@ -128,12 +139,16 @@
         }
       });
 
+      const resultDiv = document.getElementById("result");
+
       if (correctPositions === 3) {
-        document.getElementById("message").innerText = "Em Phương Anh nể mỗi chị Hường!!!";
-        document.getElementById("result").innerText = "";
+        resultDiv.innerHTML = ""; // Xóa hết lịch sử cũ
+        document.getElementById("message").innerText = "Ở Clb, mọi người nể mỗi chị Hường!!!";
       } else {
-        document.getElementById("result").innerText =
-          `Có ${correctDigits} chữ số đúng, trong đó có ${correctPositions} chữ số ở đúng vị trí.`;
+        const resultLine = document.createElement("div");
+        resultLine.className = "history-line";
+        resultLine.innerText = `Số ${userString} có ${correctDigits} chữ số đúng, trong đó có ${correctPositions} chữ số ở đúng vị trí.`;
+        resultDiv.prepend(resultLine);
         document.getElementById("message").innerText = "";
       }
     }
